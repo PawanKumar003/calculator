@@ -3,10 +3,17 @@ import "./App.css";
 
 function App() {
   const [changeValue, setChangeValue] = useState();
-  const [show , setShow] = useState(false);
+  const [chackVal, setCheckVal] = useState("");
+  const [show, setShow] = useState(true);
 
   const getValue = (e) => {
     setChangeValue(changeValue ? changeValue + e.target.value : e.target.value);
+  };
+
+  const opratorValue = (e) => {
+    setCheckVal(e.target.value);
+    setShow(true);
+    setChangeValue(changeValue ? changeValue + e.target.value : null);
   };
 
   const equalVal = () => {
@@ -23,10 +30,12 @@ function App() {
       var val = changeValue.split("/");
       setChangeValue(parseInt(val[0]) / parseInt(val[1]));
     }
+    setShow(false);
   };
 
   const clearVal = () => {
     setChangeValue("");
+    setShow(false);
   };
 
   return (
@@ -50,10 +59,11 @@ function App() {
           />
 
           <input
+            disabled={chackVal ? show : false}
             type="button"
             className="button pink"
             value="/"
-            onClick={getValue}
+            onClick={opratorValue}
           />
         </p>
         <p>
@@ -76,10 +86,11 @@ function App() {
             onClick={getValue}
           />
           <input
+            disabled={chackVal ? show : false}
             type="button"
             className="button pink"
             value="*"
-            onClick={getValue}
+            onClick={opratorValue}
           />
         </p>
         <p>
@@ -102,10 +113,11 @@ function App() {
             onClick={getValue}
           />
           <input
+            disabled={chackVal ? show : false}
             type="button"
             className="button pink"
             value="-"
-            onClick={getValue}
+            onClick={opratorValue}
           />
         </p>
         <p>
@@ -128,12 +140,11 @@ function App() {
             onClick={getValue}
           />
           <input
-            // disabled={`${show === true ? "disabled" : 'enable'}`}
-            //disabled={show}
+            disabled={chackVal ? show : false}
             type="button"
             className="button pink"
             value="+"
-            onClick={getValue}
+            onClick={opratorValue}
           />
         </p>
         <p>
